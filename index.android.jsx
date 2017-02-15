@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { AppRegistry } from 'react-native';
 import App from './src/native/app.native';
 
-export default class dressCode extends Component {
-  render() {
-    return (
-      <App />
-    );
-  }
-}
+const dressCode = () => <App />;
 
 AppRegistry.registerComponent('dresscode', () => dressCode);
