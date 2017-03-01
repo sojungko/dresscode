@@ -12,12 +12,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 50,
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 7,
+    textAlign: 'center',
+    margin: 5,
   },
 });
 
@@ -30,7 +33,7 @@ export default class LogIn extends Component {
     };
   }
 
-  loginHandler() {
+  pressHandler() {
     // fetch('http://localhost:8000/api/login')
   }
 
@@ -48,8 +51,9 @@ export default class LogIn extends Component {
           style={styles.input}
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password}
+          secureTextEntry={true}
         />
-        <TouchableOpacity onPress={this.loginHandler()}>
+        <TouchableOpacity>
           <Text>
             Sign In
           </Text>

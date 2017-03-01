@@ -12,12 +12,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 50,
   },
   input: {
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 7,
+    borderRadius: 6,
+    margin: 5,
+    textAlign: 'center',
   },
 });
 
@@ -31,6 +34,10 @@ export default class SignUp extends Component {
       password: '',
     };
   }
+
+  // pressHandler() {
+  //   fetch('http://localhost:8000/api/user/post')
+  // }
   render() {
     return (
       <View style={styles.container}>
@@ -55,6 +62,7 @@ export default class SignUp extends Component {
         <Text>Password</Text>
         <TextInput
           style={styles.input}
+          secureTextEntry={true}
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password}
         />
