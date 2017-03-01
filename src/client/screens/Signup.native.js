@@ -21,22 +21,31 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class LogIn extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null,
-      password: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
     };
   }
-
-  loginHandler() {
-    // fetch('http://localhost:8000/api/login')
-  }
-
   render() {
     return (
       <View style={styles.container}>
+        <Text>First Name</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={text => this.setState({ firstName: text })}
+          value={this.state.firstName}
+        />
+        <Text>Last Name</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={text => this.setState({ lastName: text })}
+          value={this.state.lastName}
+        />
         <Text>Email</Text>
         <TextInput
           style={styles.input}
@@ -49,9 +58,9 @@ export default class LogIn extends Component {
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password}
         />
-        <TouchableOpacity onPress={this.loginHandler()}>
+        <TouchableOpacity>
           <Text>
-            Sign In
+            Sign Up
           </Text>
         </TouchableOpacity>
       </View>
