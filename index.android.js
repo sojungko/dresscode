@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import App from './src/native/app.native';
+import App from './src/client/app.native';
 
 const dressCode = () => <App />;
 
