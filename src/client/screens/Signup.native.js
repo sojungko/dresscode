@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +39,7 @@ export default class SignUp extends Component {
 
   // pressHandler() {
   //   fetch('http://localhost:8000/api/user/post')
+  //     .then(())
   // }
   render() {
     return (
@@ -66,10 +69,10 @@ export default class SignUp extends Component {
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password}
         />
-        <TouchableOpacity>
-          <Text>
+      <TouchableOpacity>
+          <Button onPress={()=>Actions.login}>
             Sign Up
-          </Text>
+          </Button>
         </TouchableOpacity>
       </View>
     );

@@ -1,19 +1,32 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Modal, Reducer, ActionConst } from 'react-native-router-flux';
 import { Provider } from 'react-redux';
 import store from './store.native';
 
 import LogIn from './screens/Login.native';
 import SignUp from './screens/Signup.native';
 
+const reducerCreate = params=>{
+    const defaultReducer = Reducer(params);
+    return (state, action)=>{
+        console.log("ACTION:", action);
+        return defaultReducer(state, action);
+    }
+};
+
 const App = () => (
   <Provider store={store}>
-    <Router>
-      <Scene key="root" component={SignUp}>
+    <Router createReducer={reducerCreate}>
+      <Scene key="modal" component={Modal} >
+        <Scene key="root">
+          <Scene key="signup" component={SignUp} initial={true} type={ActionConst.REPLACE} />
+          <Scene key="login" component={LogIn} />
+          <Scene key="register" />
+          <Scene key="home" />
+        </Scene>
         <Scene key="login" component={LogIn} />
-        <Scene key="register" />
-        <Scene key="home" />
       </Scene>
+
     </Router>
   </Provider>
 );
