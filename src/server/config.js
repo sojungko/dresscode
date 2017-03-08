@@ -54,25 +54,19 @@ const Picture = db.define('Picture', {
       isUrl: true,
     },
   },
+  likes: Sequelize.INTEGER,
+  dislikes: Sequelize.INTEGER,
 });
 
 const Comment = db.define('Comment', {
   content: Sequelize.TEXT,
 });
 
-const Like = db.define('Like', {
-  liked: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: null,
-  },
-});
-
 Picture.belongsTo(User);
 User.hasMany(Picture);
-
-
+Comment.belongsTo(Picture);
+Picture.hasMany(Comment);
 
 exports.User = User;
 exports.Picture = Picture;
 exports.Comment = Comment;
-exports.Like = Like;
