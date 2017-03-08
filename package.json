@@ -8,7 +8,14 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
+    "blipp": "^2.3.0",
+    "boom": "^4.2.0",
+    "hapi": "^16.1.0",
+    "hapi-postgres-connection": "^6.1.0",
+    "joi": "^10.2.2",
     "moment": "^2.17.1",
+    "path": "^0.12.7",
+    "pg": "^6.1.2",
     "react": "15.4.2",
     "react-native": "0.40.0",
     "react-native-button": "^1.8.2",
@@ -16,7 +23,8 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sequelize": "^3.30.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
