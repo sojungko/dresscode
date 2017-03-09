@@ -1,23 +1,19 @@
 const Hapi = require('hapi');
-const Inert = require('inert');
 const Blipp = require('blipp');
+const routes = require('./routes');
 
-require('dotenv').config();
+const server = new Hapi.Server(3000);
 
-const server = new Hapi.Server();
-server.connection({ port: 8000, host: 'localhost' });
+server.register({
+  register: require('hapi-postgres-connection')
+}, (err) => {
+  if (err) {
+    // handle plugin startup error
+  }
+});
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (request, reply) => {
-    const email = 'test@test.net';
-    const select = `SELECT * FROM people WHERE ${email}`;
-    request.pg.client.query(select, (err, result) => {
-      console.log(err, result);
-      return reply(result.rows[0]);
-    });
-  },
+server.register(Blipp, () => {
+  server.route(routes);
 });
 
 server.register([{ // register all your plugins
