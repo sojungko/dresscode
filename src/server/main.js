@@ -4,14 +4,6 @@ const routes = require('./routes');
 
 const server = new Hapi.Server(3000);
 
-server.register({
-  register: require('hapi-postgres-connection')
-}, (err) => {
-  if (err) {
-    // handle plugin startup error
-  }
-});
-
 server.register(Blipp, () => {
   server.route(routes);
 });
@@ -19,7 +11,6 @@ server.register(Blipp, () => {
 server.register([{ // register all your plugins
   register: require('hapi-postgres-connection'),
 },
-  Inert,
   Blipp,
 ], (err) => {
   if (err) {
