@@ -4,13 +4,13 @@ module.exports = {
   routes: [
     {
       method: 'GET',
-      path: '/api/user',
+      path: '/api/user/{username}',
       handler: handlers.getUser,
     },
     {
-      method: 'GET',
-      path: '/api/',
-      handler: handlers,
+      method: 'POST',
+      path: '/api/user/post',
+      handler: handlers.postUser,
     },
     {
       method: 'GET',

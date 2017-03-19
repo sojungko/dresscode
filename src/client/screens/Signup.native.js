@@ -41,6 +41,7 @@ export default class SignUp extends Component {
   //   fetch('http://localhost:8000/api/user/post')
   //     .then(())
   // }
+  
   render() {
     return (
       <View style={styles.container}>
