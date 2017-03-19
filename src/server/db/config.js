@@ -11,15 +11,16 @@ const db = new Sequelize('dresscode', 'root', '', {
 });
 
 const User = db.define('User', {
-  firstName: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       isAlpha: true,
     },
   },
-  lastName: {
+  name: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       isAlpha: true,
     },

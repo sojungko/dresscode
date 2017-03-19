@@ -30,8 +30,8 @@ export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      username: '',
+      name: '',
       email: '',
       password: '',
     };
@@ -41,21 +41,21 @@ export default class SignUp extends Component {
   //   fetch('http://localhost:8000/api/user/post')
   //     .then(())
   // }
-  
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>First Name</Text>
+        <Text>Username</Text>
         <TextInput
           style={styles.input}
-          onChangeText={text => this.setState({ firstName: text })}
-          value={this.state.firstName}
+          onChangeText={text => this.setState({ username: text })}
+          value={this.state.username}
         />
-        <Text>Last Name</Text>
+        <Text>Name</Text>
         <TextInput
           style={styles.input}
-          onChangeText={text => this.setState({ lastName: text })}
-          value={this.state.lastName}
+          onChangeText={text => this.setState({ name: text })}
+          value={this.state.name}
         />
         <Text>Email</Text>
         <TextInput

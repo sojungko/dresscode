@@ -14,6 +14,6 @@ export default class Profile extends Component {
       firstName: '',
       lastName: '',
       profilePic: '',
-    }
+    };
   }
 }
