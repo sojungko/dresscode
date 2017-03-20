@@ -1,12 +1,15 @@
+require('dotenv').config();
 const Hapi = require('hapi');
 const Blipp = require('blipp');
-const routes = require('./routes');
+const HPC = require('hapi-postgres-connection');
 
-const server = new Hapi.Server(3000);
+const routes = require('./routes').routes;
 
-server.register([{ // register all your plugins
-  register: require('hapi-postgres-connection'),
-},
+const server = new Hapi.Server();
+server.connection({ port: 3000 });
+
+server.register([
+  HPC,
   Blipp,
 ], (err) => {
   if (err) {

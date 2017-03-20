@@ -10,7 +10,7 @@ const db = new Sequelize('dresscode', 'root', '', {
   },
 });
 
-const User = db.define('User', {
+const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -48,7 +48,7 @@ const User = db.define('User', {
   },
 });
 
-const Picture = db.define('Picture', {
+const Picture = db.define('picture', {
   url: {
     type: Sequelize.STRING,
     validate: {
@@ -59,7 +59,7 @@ const Picture = db.define('Picture', {
   dislikes: Sequelize.INTEGER,
 });
 
-const Comment = db.define('Comment', {
+const Comment = db.define('comment', {
   content: Sequelize.TEXT,
 });
 

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Button from 'react-native-button';
+import 'whatwg-fetch';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,10 +38,12 @@ export default class SignUp extends Component {
     };
   }
 
-  // pressHandler() {
-  //   fetch('http://localhost:8000/api/user/post')
-  //     .then(())
-  // }
+  _onPressButton = () => {
+    fetch('http://localhost:3000/api/user/post')
+      .then(() => {
+        console.log('button clicked');
+      });
+  }
 
   render() {
     return (
@@ -71,7 +74,7 @@ export default class SignUp extends Component {
           value={this.state.password}
         />
       <TouchableOpacity>
-          <Button onPress={()=>Actions.login}>
+          <Button onPress={this._onPressButton}>
             Sign Up
           </Button>
         </TouchableOpacity>

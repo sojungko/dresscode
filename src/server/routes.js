@@ -12,9 +12,5 @@ module.exports = {
       path: '/api/user/post',
       handler: handlers.postUser,
     },
-    {
-      method: 'GET',
-      path: '/api/',
-    },
   ],
 };

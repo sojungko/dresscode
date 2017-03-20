@@ -11,6 +11,7 @@ module.exports = {
   },
 
   postUser: (req, reply) => {
+    console.log('request.body : ', req.body);
     // const { username, name, email, password } = req;
     // hash password
     // save to database
