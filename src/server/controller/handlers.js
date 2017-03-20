@@ -1,4 +1,5 @@
 const db = require('../db/config');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
 
@@ -11,12 +12,34 @@ module.exports = {
   },
 
   postUser: (req, reply) => {
-    console.log('request.body : ', req.body);
-    // const { username, name, email, password } = req;
-    // hash password
-    // save to database
-    // send back 201 response
-    reply();
+    const { username, name, email, password } = JSON.parse(req.payload);
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        console.log('Error hashing password : ', err);
+      } else {
+        db.User.create({ username, name, email, password: hash }).then(user => {
+          console.log('user saved: ', user);
+          return reply(user.dataValues).code(201);
+        });
+      }
+    });
+  },
+
+  signInUser: (req, reply) => {
+    const { username, password } = JSON.parse(req.payload);
+    db.User.findAll({
+      where: { username },
+    })
+      .then(user => {
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (err) {
+            console.log('Error comparing passwords : ', err);
+          } else {
+            console.log(res);
+            return reply();
+          }
+        });
+      });
   },
 
   followUser: (req, reply) => {

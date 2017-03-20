@@ -30,14 +30,14 @@ const User = db.define('user', {
     unique: true,
     allowNull: false,
     validate: {
-      isEmail: true,
+      // isEmail: true,
     },
   },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      len: [6, 16],
+      // len: [6, 16],
     },
   },
   profilePic: {
@@ -67,6 +67,8 @@ Picture.belongsTo(User);
 User.hasMany(Picture);
 Comment.belongsTo(Picture);
 Picture.hasMany(Comment);
+
+db.sync({ force: true });
 
 exports.User = User;
 exports.Picture = Picture;

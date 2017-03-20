@@ -8,6 +8,7 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "blipp": "^2.3.0",
     "boom": "^4.2.0",
     "dotenv": "^4.0.0",

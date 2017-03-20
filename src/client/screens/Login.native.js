@@ -30,19 +30,33 @@ export default class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null,
-      password: null,
+      username: '',
+      password: '',
     };
+  }
+
+  _onPressButton() {
+    console.log('this.state : ', this.state);
+    fetch('http://localhost:3000/api/user/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      }),
+    })
+      .then(()=> {
+        Actions.profile();
+      });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Email</Text>
+        <Text>Username</Text>
         <TextInput
           style={styles.input}
-          onChangeText={text => this.setState({ email: text })}
-          value={this.state.email}
+          onChangeText={text => this.setState({ username: text })}
+          value={this.state.username}
         />
         <Text>Password</Text>
         <TextInput
@@ -52,7 +66,11 @@ export default class LogIn extends Component {
           secureTextEntry={true}
         />
         <TouchableOpacity>
-          <Button>
+          <Button
+            onPress={() => {
+            this._onPressButton();
+            }}
+          >
             Sign In
           </Button>
         </TouchableOpacity>

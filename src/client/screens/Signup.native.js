@@ -39,9 +39,18 @@ export default class SignUp extends Component {
   }
 
   _onPressButton = () => {
-    fetch('http://localhost:3000/api/user/post')
-      .then(() => {
-        console.log('button clicked');
+    fetch('http://localhost:3000/api/user/post', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.username,
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      })
+    })
+      .then((user)=> {
+        console.log('user saved : ', user);
+        Actions.login();
       });
   }
 

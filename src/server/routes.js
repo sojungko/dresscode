@@ -12,5 +12,10 @@ module.exports = {
       path: '/api/user/post',
       handler: handlers.postUser,
     },
+    {
+      method: 'POST',
+      path: '/api/user/signin',
+      handler: handlers.signInUser,
+    },
   ],
 };
