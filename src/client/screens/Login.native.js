@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   View,
   Text,
   TextInput,
@@ -44,9 +45,15 @@ export default class LogIn extends Component {
         password: this.state.password,
       }),
     })
-      .then(()=> {
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        console.log(res.token);
+        AsyncStorage.setItem('token', res.token);
         Actions.profile();
-      });
+        // console.log(React.AsyncStorage.getItem('token'));
+      })
   }
 
   render() {

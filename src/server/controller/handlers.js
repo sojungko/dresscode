@@ -1,5 +1,6 @@
 const db = require('../db/config');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 
@@ -31,12 +32,13 @@ module.exports = {
       where: { username },
     })
       .then(user => {
-        bcrypt.compare(password, user.password, (err, res) => {
+        console.log(user);
+        bcrypt.compare(password, user[0].dataValues.password, (err, res) => {
           if (err) {
             console.log('Error comparing passwords : ', err);
           } else {
-            console.log(res);
-            return reply();
+            const token = jwt.sign(user[0].dataValues.username, process.env.JWT_SECRET);
+            return reply({ token }).code(201);
           }
         });
       });

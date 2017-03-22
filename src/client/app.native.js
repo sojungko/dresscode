@@ -5,6 +5,7 @@ import store from './store.native';
 
 import LogIn from './screens/Login.native';
 import SignUp from './screens/Signup.native';
+import Profile from './screens/Profile.native';
 
 const reducerCreate = params=>{
     const defaultReducer = Reducer(params);
@@ -21,7 +22,7 @@ const App = () => (
         <Scene key="root">
           <Scene key="signup" component={SignUp} initial={true} />
           <Scene key="login" component={LogIn} />
-          <Scene key="register" />
+          <Scene key="profile" component={Profile} />
           <Scene key="home" />
         </Scene>
       </Scene>

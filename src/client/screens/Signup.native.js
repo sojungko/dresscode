@@ -83,10 +83,12 @@ export default class SignUp extends Component {
           value={this.state.password}
         />
       <TouchableOpacity>
-          <Button onPress={this._onPressButton}>
-            Sign Up
-          </Button>
-        </TouchableOpacity>
+        <Button onPress={this._onPressButton}>
+          Sign Up
+        </Button>
+      </TouchableOpacity>
+      <Text>Already have an account?</Text>
+      <Button onPress={Actions.login}>Log In</Button>
       </View>
     );
   }
