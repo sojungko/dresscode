@@ -6,6 +6,7 @@ import {
 import 'whatwg-fetch';
 
 import Header from '../components/Header.native';
+import Gallery from '../components/Gallery.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +29,7 @@ export default class Profile extends Component {
     return (
       <View style={styles.container}>
         <Header />
+        <Gallery />
       </View>
     )
   }

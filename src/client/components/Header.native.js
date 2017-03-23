@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
   Image,
+  TouchableOpacity,
+  Button,
   StyleSheet,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import samplePic from '../samplepic.jpg';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +19,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 20,
+    borderWidth: 3,
   },
   profileInfo: {
     width: 0,
@@ -33,27 +38,44 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     fontSize: 13,
   },
-})
+});
 
-const Header = () => (
-  <View style={styles.container}>
-    <Image
-      style={styles.profilePic}
-      source={require('../assets/samplepic.jpg')}
-    />
-    <View style={styles.profileInfo}>
-      <Text
-        style={styles.name}
-      >
-        Sojung
-      </Text>
-      <Text
-        style={styles.bio}
-      >
-        Hello world! blablabla
-      </Text>
-    </View>
-  </View>
-);
+// TODO Pass down image source, name, bio as props
 
-export default Header;
+export default class Header extends Component {
+  _onPressButton() {
+
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image
+          style={styles.profilePic}
+          source={samplePic}
+        />
+        <View style={styles.profileInfo}>
+          <Text
+            style={styles.name}
+          >
+            Sojung
+          </Text>
+          <Text
+            style={styles.bio}
+          >
+            Hello world! blablabla
+          </Text>
+          <TouchableOpacity>
+            <Button
+              onPress={() => {
+                this._onPressButton();
+              }}
+              title="Edit Profile"
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+
+  }
+}
