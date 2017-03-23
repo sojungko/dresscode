@@ -82,13 +82,13 @@ export default class SignUp extends Component {
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password}
         />
-      <TouchableOpacity>
-        <Button onPress={this._onPressButton}>
-          Sign Up
-        </Button>
-      </TouchableOpacity>
-      <Text>Already have an account?</Text>
-      <Button onPress={Actions.login}>Log In</Button>
+        <TouchableOpacity>
+          <Button onPress={this._onPressButton}>
+            Sign Up
+          </Button>
+        </TouchableOpacity>
+        <Text>Already have an account?</Text>
+        <Button onPress={Actions.login}>Log In</Button>
       </View>
     );
   }

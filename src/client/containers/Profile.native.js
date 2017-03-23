@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import {
-  AsyncStorage,
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import 'whatwg-fetch';
 
+import Header from '../components/Header.native';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 50,
+    marginLeft: 30,
   },
-  header: {
-    flex: 0.3,
-  },
-})
+});
 
 export default class Profile extends Component {
   constructor(props) {
@@ -27,13 +24,10 @@ export default class Profile extends Component {
     };
   }
 
-  componentWillMount() {
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.state.name}</Text>
+        <Header />
       </View>
     )
   }
