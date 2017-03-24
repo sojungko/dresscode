@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -42,40 +42,31 @@ const styles = StyleSheet.create({
 
 // TODO Pass down image source, name, bio as props
 
-export default class Header extends Component {
-  _onPressButton() {
-
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image
-          style={styles.profilePic}
-          source={samplePic}
+const Header = () => (
+  <View style={styles.container}>
+    <Image
+      style={styles.profilePic}
+      source={samplePic}
+    />
+    <View style={styles.profileInfo}>
+      <Text
+        style={styles.name}
+      >
+        Sojung
+      </Text>
+      <Text
+        style={styles.bio}
+      >
+        Hello world! blablabla
+      </Text>
+      <TouchableOpacity>
+        <Button
+          onPress={Actions.editprofile}
+          title="Edit Profile"
         />
-        <View style={styles.profileInfo}>
-          <Text
-            style={styles.name}
-          >
-            Sojung
-          </Text>
-          <Text
-            style={styles.bio}
-          >
-            Hello world! blablabla
-          </Text>
-          <TouchableOpacity>
-            <Button
-              onPress={() => {
-                this._onPressButton();
-              }}
-              title="Edit Profile"
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
+      </TouchableOpacity>
+    </View>
+  </View>
+);
 
-  }
-}
+export default Header;

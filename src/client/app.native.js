@@ -7,16 +7,21 @@ import store from './store.native';
 import LogIn from './containers/Login.native';
 import SignUp from './containers/Signup.native';
 import Profile from './containers/Profile.native';
+import EditProfile from './containers/EditProfile.native';
+// import AuthView from './components/AuthView.native';
 
 const connectedLogIn = connect()(LogIn);
 const connectedSignUp = connect()(SignUp);
 const connectedProfile = connect()(Profile);
+const connectedEditProfile = connect()(EditProfile);
+// const connectedAuthView = connect()(AuthView);
 
 const scenes = Actions.create(
     <Scene key="root">
       <Scene key="signup" component={connectedSignUp} />
       <Scene key="login" component={connectedLogIn} />
       <Scene key="profile" component={connectedProfile} />
+      <Scene key="editprofile" component={connectedEditProfile} />
     </Scene>
 );
 
