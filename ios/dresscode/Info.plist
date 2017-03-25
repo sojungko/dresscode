@@ -42,6 +42,11 @@
 	<string>Take photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Select photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Ionicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>

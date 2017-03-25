@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
+import BottomToolBar from 'react-native-bottom-toolbar';
 import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
@@ -21,8 +22,26 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 40,
-  }
+  },
 });
+
+const nestedActions = [
+    {
+        title: 'Analyze', onPress: (index: number, title: string) => {
+            console.log(`pressed ${index} ${title}`)
+        }
+    },
+    {
+        title: 'Delete', style: 'destructive', onPress: (index: number, title: string) => {
+            console.log(`pressed ${index} ${title}`)
+        }
+    },
+    {
+        title: 'Cancel', style: 'cancel', onPress: (index: number, title: string) => {
+            console.log(`pressed ${index} ${title}`)
+        }
+    }
+]
 
 export default class EditProfile extends Component {
   render() {
@@ -38,6 +57,17 @@ export default class EditProfile extends Component {
             onPress={Actions.camerascreen}
           />
         </TouchableOpacity>
+        <BottomToolBar
+          onPress={this.onToolbarPress}
+          actions={
+          [
+                  { title: 'Mark All', iconName: 'ios-done-all-outline', size: 37 },
+                  { title: 'Edit', iconName: 'pencil', font: 'simple', size: 15 },
+                  { title: 'More', iconName: 'ios-albums-outline', actions: nestedActions },
+                  { title: 'Download', iconName: 'ios-download-outline' },
+          ]
+          }
+        />
       </View>
 
     );
