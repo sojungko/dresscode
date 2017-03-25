@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import samplePic from '../samplepic.jpg';
+import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
   container: {

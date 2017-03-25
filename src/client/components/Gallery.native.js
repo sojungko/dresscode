@@ -5,9 +5,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import samplePic2 from '../samplepic2.jpg';
-import samplePic3 from '../samplepic3.png';
-import samplePic4 from '../samplepic4.jpg';
+import samplePic2 from '../../assets/samplepic2.jpg';
+import samplePic3 from '../../assets/samplepic3.png';
+import samplePic4 from '../../assets/samplepic4.jpg';
 
 const styles = StyleSheet.create({
   container: {
