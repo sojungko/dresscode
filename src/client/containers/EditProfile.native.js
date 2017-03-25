@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   Image,
   TouchableOpacity,
+  ActionSheetIOS,
   Button,
   StyleSheet,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
-import BottomToolBar from 'react-native-bottom-toolbar';
+// import BottomToolBar from 'react-native-bottom-toolbar';
 import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
@@ -23,27 +23,36 @@ const styles = StyleSheet.create({
     width: 80,
     borderRadius: 40,
   },
+  button: {
+    marginBottom: 10,
+    fontWeight: '500',
+  },
 });
 
-const nestedActions = [
-    {
-        title: 'Analyze', onPress: (index: number, title: string) => {
-            console.log(`pressed ${index} ${title}`)
-        }
-    },
-    {
-        title: 'Delete', style: 'destructive', onPress: (index: number, title: string) => {
-            console.log(`pressed ${index} ${title}`)
-        }
-    },
-    {
-        title: 'Cancel', style: 'cancel', onPress: (index: number, title: string) => {
-            console.log(`pressed ${index} ${title}`)
-        }
-    }
-]
+const BUTTONS = [
+  'Camera Roll',
+  'Take Photo',
+  'Delete',
+  'Cancel',
+];
+const DESTRUCTIVE_INDEX = 2;
+const CANCEL_INDEX = 3;
 
 export default class EditProfile extends Component {
+  showActionSheet = () => {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: BUTTONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DESTRUCTIVE_INDEX,
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        Actions.cameraroll();
+      } else if (buttonIndex === 1) {
+        Actions.camerascreen();
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -54,20 +63,10 @@ export default class EditProfile extends Component {
         <TouchableOpacity>
           <Button
             title="Change Profile Photo"
-            onPress={Actions.camerascreen}
+            onPress={this.showActionSheet}
+            style={styles.button}
           />
         </TouchableOpacity>
-        <BottomToolBar
-          onPress={this.onToolbarPress}
-          actions={
-          [
-                  { title: 'Mark All', iconName: 'ios-done-all-outline', size: 37 },
-                  { title: 'Edit', iconName: 'pencil', font: 'simple', size: 15 },
-                  { title: 'More', iconName: 'ios-albums-outline', actions: nestedActions },
-                  { title: 'Download', iconName: 'ios-download-outline' },
-          ]
-          }
-        />
       </View>
 
     );
