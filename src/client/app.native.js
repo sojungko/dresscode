@@ -8,11 +8,15 @@ import LogIn from './containers/Login.native';
 import SignUp from './containers/Signup.native';
 import Profile from './containers/Profile.native';
 import EditProfile from './containers/EditProfile.native';
+import CameraRoll from './containers/CameraRoll.native';
+import CameraScreen from './containers/CameraScreen.native';
 
 const connectedLogIn = connect()(LogIn);
 const connectedSignUp = connect()(SignUp);
 const connectedProfile = connect()(Profile);
 const connectedEditProfile = connect()(EditProfile);
+const connectedCameraRoll = connect()(CameraRoll);
+const connectedCameraScreen = connect()(CameraScreen);
 
 const scenes = Actions.create(
     <Scene key="root">
@@ -20,6 +24,8 @@ const scenes = Actions.create(
       <Scene key="login" component={connectedLogIn} />
       <Scene key="profile" component={connectedProfile} />
       <Scene key="editprofile" component={connectedEditProfile} />
+      <Scene key="camerascreen" component={connectedCameraScreen} />
+      <Scene key="cameraroll" component={connectedCameraRoll} />
     </Scene>
 );
 

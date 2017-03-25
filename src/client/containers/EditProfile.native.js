@@ -7,8 +7,9 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
-import samplePic from '../samplepic.jpg';
+import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,9 +35,11 @@ export default class EditProfile extends Component {
         <TouchableOpacity>
           <Button
             title="Change Profile Photo"
+            onPress={Actions.camerascreen}
           />
         </TouchableOpacity>
       </View>
+
     );
   }
 }
