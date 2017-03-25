@@ -13,7 +13,8 @@ import samplePic from '../samplepic.jpg';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 30,
+    marginLeft: 10,
+    marginRight: 10,
   },
   profilePic: {
     width: 100,

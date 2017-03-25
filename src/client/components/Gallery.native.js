@@ -11,14 +11,12 @@ import samplePic4 from '../samplepic4.jpg';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
-    marginRight: 30,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: 10,
   },
   image: {
     flex: 3.33,
-    margin: 4,
     width: 100,
     height: 100,
   },
