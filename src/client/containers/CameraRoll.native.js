@@ -4,8 +4,8 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import { NavBar } from 'react-native-router-flux';
 import CameraRollPicker from 'react-native-camera-roll-picker';
-
 
 const styles = StyleSheet.create({
   container: {
@@ -62,7 +62,7 @@ export default class CameraRoll extends Component {
           removeClippedSubviews={false}
           groupTypes="SavedPhotos"
           batchSize={5}
-          maximum={3}
+          maximum={1}
           selected={this.state.selected}
           assetType="Photos"
           imagesPerRow={3}

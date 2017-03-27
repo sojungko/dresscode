@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 });
 
 const BUTTONS = [
-  'Camera Roll',
+  'Choose from Library',
   'Take Photo',
   'Delete',
   'Cancel',

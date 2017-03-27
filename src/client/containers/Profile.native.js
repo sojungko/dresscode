@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -15,13 +15,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Profile extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header />
-        <Gallery />
-      </View>
-    )
-  }
-}
+const Profile = () => (
+  <View style={styles.container}>
+    <Header />
+    <Gallery />
+  </View>
+);
+
+export default Profile;
