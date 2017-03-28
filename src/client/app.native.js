@@ -35,11 +35,6 @@ const scenes = Actions.create(
     </Scene>
 );
 
-/*
-DATABASE_URL=postgres://root:@localhost/dresscode
-JWT_SECRET=nyannyan
-CLOUDINARY_URL=cloudinary://184394188512332:lwk7CABIghwtpUMW23m5zESE5ww@dresscode
-*/
 //
 // const reducerCreate = params=>{
 //     const defaultReducer = Reducer(params);
