@@ -8,10 +8,10 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "bcryptjs": "^2.4.3",
     "blipp": "^2.3.0",
     "boom": "^4.2.0",
-    "cloudinary": "^1.8.0",
     "dotenv": "^4.0.0",
     "hapi": "^16.1.0",
     "hapi-node-postgres": "^4.1.0",

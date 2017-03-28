@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { NavBar } from 'react-native-router-flux';
 import CameraRollPicker from 'react-native-camera-roll-picker';
+import { postProfilePic } from '../actions/index.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,9 +43,10 @@ export default class CameraRoll extends Component {
     };
   }
 
-  getSelectedImages(images, current) {
+  getSelectedImages(images) {
     this.setState({ num: images.length, selected: images })
-    console.log(current);
+    console.log(images[0]);
+    postProfilePic(images[0]);
   }
 
   render() {
