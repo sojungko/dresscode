@@ -25,10 +25,21 @@ const scenes = Actions.create(
       <Scene key="profile" component={connectedProfile} />
       <Scene key="editprofile" component={connectedEditProfile} />
       <Scene key="camerascreen" component={connectedCameraScreen} />
-      <Scene key="cameraroll" component={connectedCameraRoll} />
+      <Scene
+        key="cameraroll"
+        component={connectedCameraRoll}
+        backTitle="Cancel"
+        rightTitle="Done"
+        onRight={() => { Actions.editprofile() }}
+      />
     </Scene>
 );
 
+/*
+DATABASE_URL=postgres://root:@localhost/dresscode
+JWT_SECRET=nyannyan
+CLOUDINARY_URL=cloudinary://184394188512332:lwk7CABIghwtpUMW23m5zESE5ww@dresscode
+*/
 //
 // const reducerCreate = params=>{
 //     const defaultReducer = Reducer(params);
