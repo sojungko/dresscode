@@ -1,8 +1,8 @@
 import React from 'react';
-import { store } from 'react-redux';
 import { Actions, Scene } from 'react-native-router-flux';
+import store from './store.native';
 
-import { selectProfilePic } from './actions/index.native';
+import { toggleProfilePicSelected } from './actions/index.native';
 
 import LogIn from './containers/Login.native';
 import SignUp from './containers/Signup.native';
@@ -24,7 +24,9 @@ const scenes = Actions.create(
       backTitle="Cancel"
       rightTitle="Done"
       onRight={() => {
-        store.dispatch(selectProfilePic(true));
+        const isSelected = store.getState().editProfile.profilePicIsSelected;
+        console.log('store.getState() : ', store.getState());
+        store.dispatch(toggleProfilePicSelected(isSelected));
         Actions.editprofile();
       }}
     />
