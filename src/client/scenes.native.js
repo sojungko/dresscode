@@ -1,5 +1,8 @@
 import React from 'react';
-import { Scene, Actions } from 'react-native-router-flux';
+import { store } from 'react-redux';
+import { Actions, Scene } from 'react-native-router-flux';
+
+import { selectProfilePic } from './actions/index.native';
 
 import LogIn from './containers/Login.native';
 import SignUp from './containers/Signup.native';
@@ -7,7 +10,6 @@ import Profile from './containers/Profile.native';
 import EditProfile from './containers/EditProfile.native';
 import CameraRoll from './containers/CameraRoll.native';
 import CameraScreen from './containers/CameraScreen.native';
-
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -21,9 +23,13 @@ const scenes = Actions.create(
       component={CameraRoll}
       backTitle="Cancel"
       rightTitle="Done"
-      onRight={() => { Actions.editprofile() }}
+      onRight={() => {
+        store.dispatch(selectProfilePic(true));
+        Actions.editprofile();
+      }}
     />
   </Scene>
 );
+
 
 export default scenes;

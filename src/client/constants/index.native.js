@@ -1,2 +1,5 @@
 export const SIGN_UP_USER = 'SIGN_UP_USER';
 export const LOG_IN_USER = 'LOG_IN_USER';
+
+export const SELECT_PROFILE_PIC = 'SELECT_PROFILE_PIC';
+export const PROFILE_PIC_IS_SELECTED = 'PROFILE_PIC_IS_SELECTED';

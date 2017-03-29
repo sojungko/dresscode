@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+// import { postProfilePic } from '../actions/index.native';
 import 'whatwg-fetch';
 import samplePic from '../../assets/samplepic.jpg';
 

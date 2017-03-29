@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { NavBar } from 'react-native-router-flux';
 import CameraRollPicker from 'react-native-camera-roll-picker';
-import { postProfilePic } from '../actions/index.native';
+import { selectProfilePic } from '../actions/index.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,9 +44,9 @@ class CameraRoll extends Component {
   }
 
   getSelectedImages(images) {
-    this.setState({ num: images.length, selected: images })
+    this.setState({ num: images.length, selected: images });
     console.log(images[0]);
-    postProfilePic(images[0]);
+    this.props.selectProfilePic(images[0]);
   }
 
   render() {
@@ -77,4 +76,5 @@ class CameraRoll extends Component {
   }
 }
 
-export default connect()(CameraRoll);
+
+export default connect(null, { selectProfilePic })(CameraRoll);
