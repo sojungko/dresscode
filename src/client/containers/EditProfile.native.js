@@ -10,7 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
-// import BottomToolBar from 'react-native-bottom-toolbar';
 import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
@@ -39,7 +38,7 @@ const BUTTONS = [
 const DESTRUCTIVE_INDEX = 2;
 const CANCEL_INDEX = 3;
 
-export default class EditProfile extends Component {
+class EditProfile extends Component {
   showActionSheet = () => {
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
