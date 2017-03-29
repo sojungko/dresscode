@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+import { connect } from 'react-redux';
 import 'whatwg-fetch';
 
 import Header from '../components/Header.native';
@@ -22,4 +23,4 @@ const Profile = () => (
   </View>
 );
 
-export default Profile;
+export default connect()(Profile);

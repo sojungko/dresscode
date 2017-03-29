@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+import { connect } from 'react-redux';
 import Camera from 'react-native-camera';
 
 const styles = StyleSheet.create({
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class CameraScreen extends Component {
+class CameraScreen extends Component {
   constructor(props) {
     super(props);
     this.camera = null;
@@ -245,3 +246,5 @@ export default class CameraScreen extends Component {
     );
   }
 }
+
+export default connect()(CameraScreen);

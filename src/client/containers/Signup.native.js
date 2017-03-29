@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Button from 'react-native-button';
 import 'whatwg-fetch';
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,3 +94,5 @@ export default class SignUp extends Component {
     );
   }
 }
+
+export default connect()(SignUp);

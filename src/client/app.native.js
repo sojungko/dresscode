@@ -11,28 +11,21 @@ import EditProfile from './containers/EditProfile.native';
 import CameraRoll from './containers/CameraRoll.native';
 import CameraScreen from './containers/CameraScreen.native';
 
-const connectedLogIn = connect()(LogIn);
-const connectedSignUp = connect()(SignUp);
-const connectedProfile = connect()(Profile);
-const connectedEditProfile = connect()(EditProfile);
-const connectedCameraRoll = connect()(CameraRoll);
-const connectedCameraScreen = connect()(CameraScreen);
-
 const scenes = Actions.create(
-    <Scene key="root">
-      <Scene key="signup" component={connectedSignUp} />
-      <Scene key="login" component={connectedLogIn} />
-      <Scene key="profile" component={connectedProfile} />
-      <Scene key="editprofile" component={connectedEditProfile} />
-      <Scene key="camerascreen" component={connectedCameraScreen} />
-      <Scene
-        key="cameraroll"
-        component={connectedCameraRoll}
-        backTitle="Cancel"
-        rightTitle="Done"
-        onRight={() => { Actions.editprofile() }}
-      />
-    </Scene>
+  <Scene key="root">
+    <Scene key="signup" component={SignUp} />
+    <Scene key="login" component={LogIn} />
+    <Scene key="profile" component={Profile} />
+    <Scene key="editprofile" component={EditProfile} />
+    <Scene key="camerascreen" component={CameraScreen} />
+    <Scene
+      key="cameraroll"
+      component={CameraRoll}
+      backTitle="Cancel"
+      rightTitle="Done"
+      onRight={() => { Actions.editprofile() }}
+    />
+  </Scene>
 );
 
 //

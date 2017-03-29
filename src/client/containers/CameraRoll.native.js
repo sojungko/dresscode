@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import { connect } from 'react-redux';
 import { NavBar } from 'react-native-router-flux';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { postProfilePic } from '../actions/index.native';
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class CameraRoll extends Component {
+class CameraRoll extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,3 +76,5 @@ export default class CameraRoll extends Component {
     );
   }
 }
+
+export default connect()(CameraRoll);

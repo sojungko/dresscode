@@ -7,6 +7,7 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
 // import BottomToolBar from 'react-native-bottom-toolbar';
@@ -72,3 +73,5 @@ export default class EditProfile extends Component {
     );
   }
 }
+
+export default connect()(EditProfile);
