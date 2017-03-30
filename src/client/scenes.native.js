@@ -1,8 +1,9 @@
 import React from 'react';
 import { Actions, Scene } from 'react-native-router-flux';
-import store from './store.native';
+// import Snackbar from 'react-native-snackbar';
 
-import { toggleProfilePicSelected } from './actions/index.native';
+import store from './store.native';
+import { postProfilePic } from './actions/index.native';
 
 import LogIn from './containers/Login.native';
 import SignUp from './containers/Signup.native';
@@ -10,6 +11,15 @@ import Profile from './containers/Profile.native';
 import EditProfile from './containers/EditProfile.native';
 import CameraRoll from './containers/CameraRoll.native';
 import CameraScreen from './containers/CameraScreen.native';
+
+const cameraRollRightHandler = () => {
+  const selectedPic = store.getState().editProfile.selectedPic;
+  console.log('selectedPic : ', selectedPic);
+  store.dispatch(postProfilePic(selectedPic))
+    .then(() => {
+      Actions.editprofile();
+    });
+};
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -23,12 +33,7 @@ const scenes = Actions.create(
       component={CameraRoll}
       backTitle="Cancel"
       rightTitle="Done"
-      onRight={() => {
-        const isSelected = store.getState().editProfile.profilePicIsSelected;
-        console.log('store.getState() : ', store.getState());
-        store.dispatch(toggleProfilePicSelected(isSelected));
-        Actions.editprofile();
-      }}
+      onRight={cameraRollRightHandler}
     />
   </Scene>
 );

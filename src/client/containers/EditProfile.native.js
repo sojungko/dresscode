@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import 'whatwg-fetch';
 
-import { postProfilePic, toggleProfilePicSelected } from '../actions/index.native';
+import { postProfilePic } from '../actions/index.native';
 import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
@@ -42,15 +42,8 @@ const CANCEL_INDEX = 3;
 
 class EditProfile extends Component {
   componentWillMount() {
-    console.log('this.props.profilePicIsSelected before : ', this.props.profilePicIsSelected);
-    if (this.props.profilePicIsSelected) {
-      // this.props.postProfilePic(this.props.selectedPic);
-      this.props.toggleProfilePicSelected(this.props.profilePicIsSelected);
-      console.log('this.props.selectedPic : ', this.props.selectedPic);
-      console.log('this.props.profilePicIsSelected after : ', this.props.profilePicIsSelected);
-    }
   }
- 
+
   showActionSheet = () => {
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
@@ -87,9 +80,8 @@ class EditProfile extends Component {
 
 const mapStateToProps = ({ editProfile }) => {
   return {
-    profilePicIsSelected: editProfile.profilePicIsSelected,
     selectedPic: editProfile.selectedPic,
   };
 };
 
-export default connect(mapStateToProps, { postProfilePic, toggleProfilePicSelected })(EditProfile);
+export default connect(mapStateToProps, { postProfilePic })(EditProfile);

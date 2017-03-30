@@ -1,17 +1,20 @@
-import * as A from '../constants/index.native';
+import * as C from '../constants/index.native';
 
 const INITIAL_STATE = {
   profilePicIsSelected: false,
   selectedPic: null,
+  postSuccess: false,
 };
 
 const editProfileReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case A.PROFILE_PIC_IS_SELECTED:
+    case C.PROFILE_PIC_IS_SELECTED:
       console.log('Reducer : ', action.payload);
       return { ...state, profilePicIsSelected: action.payload };
-    case A.SELECT_PROFILE_PIC:
+    case C.SELECT_PROFILE_PIC:
       return { ...state, selectedPic: action.payload };
+    case C.POST_PROFILE_PIC_SUCCESS:
+      return { ...state, postSuccess: action.payload };
     default:
       return state;
   }
