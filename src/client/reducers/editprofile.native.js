@@ -7,9 +7,9 @@ const INITIAL_STATE = {
 };
 
 const editProfileReducer = (state = INITIAL_STATE, action) => {
+  console.log('editProfileReducer action: ', action);
   switch (action.type) {
     case C.PROFILE_PIC_IS_SELECTED:
-      console.log('Reducer : ', action.payload);
       return { ...state, profilePicIsSelected: action.payload };
     case C.SELECT_PROFILE_PIC:
       return { ...state, selectedPic: action.payload };
