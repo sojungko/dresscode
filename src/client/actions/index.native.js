@@ -7,33 +7,41 @@ import * as C from '../constants/index.native';
 /* -- Image Handling -- */
 export const selectProfilePic = (image) => {
   console.log('selectProfilePic action image: ', image);
-  return (dispatch) => {
-    return dispatch({ type: C.SELECT_PROFILE_PIC, payload: image });
-  };
+  return { type: C.SELECT_PROFILE_PIC, payload: image };
+};
+
+
+export const captureProfilePic = (image) => {
+  return dispatch => dispatch({ type: C.CAPTURE_PROFILE_PIC, payload: image.path });
 };
 
 export const postProfilePic = (image) => {  
   console.log('Posting profile pic... ', image);
-  const file = {
-    uri: image.uri,
-    name: image.filename,
-    type: 'image/png',
-  };
-  console.log('access key id : ', AWS_ACCESS_KEY_ID);
-  const options = {
-    keyPrefix: 'images/',
-    bucket: 'dresscode-app',
-    region: 'us-east-1',
-    accessKey: AWS_ACCESS_KEY_ID,
-    secretKey: AWS_SECRET_ACCESS_KEY,
-    successActionStatus: 201,
-  };
-  return dispatch => RNS3.put(file, options)
-      .then((response) => {
-        console.log(response.body.postResponse);
-        return dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
-      })
-      .then(() => Actions.editprofile());
+  if (!image) {
+    Actions.pop();
+    return { type: C.NO_PROFILE_PIC_SELECTED, payload: false };
+  } else {
+    const file = {
+      uri: image.uri,
+      name: image.filename,
+      type: 'image/png',
+    };
+    console.log('access key id : ', AWS_ACCESS_KEY_ID);
+    const options = {
+      keyPrefix: 'images/',
+      bucket: 'dresscode-app',
+      region: 'us-east-1',
+      accessKey: AWS_ACCESS_KEY_ID,
+      secretKey: AWS_SECRET_ACCESS_KEY,
+      successActionStatus: 201,
+    };
+    return dispatch => RNS3.put(file, options)
+        .then((response) => {
+          console.log(response.body.postResponse);
+          return dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
+        })
+        .then(() => Actions.pop());
+  }
 };
 
 

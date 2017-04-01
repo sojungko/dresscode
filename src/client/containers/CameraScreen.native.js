@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Camera from 'react-native-camera';
+import { captureProfilePic } from '../actions/index.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,8 +30,7 @@ const styles = StyleSheet.create({
     top: 0,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   bottomOverlay: {
     bottom: 0,
@@ -68,13 +68,14 @@ class CameraScreen extends Component {
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
       },
+      isRecording: false,
     };
   }
 
   takePicture = () => {
     if (this.camera) {
       this.camera.capture()
-        .then(data => console.log(data))
+        .then(data => this.props.captureProfilePic(data))
         .catch(err => console.error(err));
     }
   }
@@ -147,6 +148,13 @@ class CameraScreen extends Component {
   }
 
   render() {
+    if (this.props.capturedPic) {
+      return (
+        <View style={styles.container}>
+          <Image source={{ uri: this.props.capturedPic }} />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <StatusBar
@@ -167,14 +175,6 @@ class CameraScreen extends Component {
         />
         <View style={[styles.overlay, styles.topOverlay]}>
           <TouchableOpacity
-            style={styles.typeButton}
-            onPress={this.switchType}
-          >
-            <Image
-              source={this.typeIcon}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
             style={styles.flashButton}
             onPress={this.switchFlash}
           >
@@ -184,6 +184,14 @@ class CameraScreen extends Component {
           </TouchableOpacity>
         </View>
         <View style={[styles.overlay, styles.bottomOverlay]}>
+          <TouchableOpacity
+            style={styles.typeButton}
+            onPress={this.switchType}
+          >
+            <Image
+              source={this.typeIcon}
+            />
+          </TouchableOpacity>            
           {
           !this.state.isRecording
           &&
@@ -204,4 +212,8 @@ class CameraScreen extends Component {
   }
 }
 
-export default connect()(CameraScreen);
+const mapStateToProps = ({ editProfile }) => {
+  return { capturedPic: editProfile.selectedPic };
+};
+
+export default connect(mapStateToProps, { captureProfilePic })(CameraScreen);

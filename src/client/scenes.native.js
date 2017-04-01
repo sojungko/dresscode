@@ -11,11 +11,24 @@ import Profile from './containers/Profile.native';
 import EditProfile from './containers/EditProfile.native';
 import CameraRoll from './containers/CameraRoll.native';
 import CameraScreen from './containers/CameraScreen.native';
+import NavBar from './components/NavBar.native';
+
+const styles = {
+  cameraScreen: {
+    backgroundColor: 'transparent',
+  },
+};
 
 const cameraRollRightHandler = () => {
   const selectedPic = store.getState().editProfile.selectedPic;
   store.dispatch(postProfilePic(selectedPic));
 };
+
+const cameraScreenRightHandler = () => {
+  console.log('here');
+  const capturedPic = store.getState().editProfile.capturedPic;
+  store.dispatch(postProfilePic(capturedPic));
+}
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -23,7 +36,12 @@ const scenes = Actions.create(
     <Scene key="login" component={LogIn} />
     <Scene key="profile" component={Profile} />
     <Scene key="editprofile" component={EditProfile} />
-    <Scene key="camerascreen" component={CameraScreen} />
+    <Scene
+      key="camerascreen"
+      component={CameraScreen}
+      navigationBarStyle={styles.cameraScreen}
+      navBar={NavBar}
+    />
     <Scene
       key="cameraroll"
       component={CameraRoll}

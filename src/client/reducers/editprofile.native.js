@@ -15,6 +15,10 @@ const editProfileReducer = (state = INITIAL_STATE, action) => {
       return { ...state, selectedPic: action.payload };
     case C.POST_PROFILE_PIC_SUCCESS:
       return { ...state, postSuccess: action.payload };
+    case C.NO_PROFILE_PIC_SELECTED:
+      return { ...state, profilePicIsSelected: action.payload };
+    case C.CAPTURE_PROFILE_PIC:
+      return { ...state, selectedPic: action.payload };
     default:
       return state;
   }
