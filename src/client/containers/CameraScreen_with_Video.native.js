@@ -68,7 +68,8 @@ class CameraScreen extends Component {
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
       },
-    };
+      isRecording: false,
+    }
   }
 
   takePicture = () => {
@@ -79,6 +80,26 @@ class CameraScreen extends Component {
     }
   }
 
+
+  startRecording = () => {
+    if (this.camera) {
+      this.camera.capture({mode: Camera.constants.CaptureMode.video})
+          .then(data => console.log(data))
+          .catch(err => console.error(err));
+      this.setState({
+        isRecording: true
+      });
+    }
+  }
+
+  stopRecording = () => {
+    if (this.camera) {
+      this.camera.stopCapture();
+      this.setState({
+        isRecording: false
+      });
+    }
+  }
 
   switchType = () => {
     let newType;
@@ -197,6 +218,28 @@ class CameraScreen extends Component {
           </TouchableOpacity>
             ||
             null
+          }
+          <View style={styles.buttonsSpace} />
+          {
+              !this.state.isRecording
+              &&
+              <TouchableOpacity
+                style={styles.captureButton}
+                onPress={this.startRecording}
+              >
+                <Image
+                  source={require('../../assets/ic_videocam_36pt.png')}
+                />
+              </TouchableOpacity>
+              ||
+              <TouchableOpacity
+                style={styles.captureButton}
+                onPress={this.stopRecording}
+              >
+                <Image
+                  source={require('../../assets/ic_stop_36pt.png')}
+                />
+              </TouchableOpacity>
           }
         </View>
       </View>

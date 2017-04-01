@@ -30,8 +30,8 @@ export const postProfilePic = (image) => {
   };
   return dispatch => RNS3.put(file, options)
       .then((response) => {
-        console.log(response.body);
-        return dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body });
+        console.log(response.body.postResponse);
+        return dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
       })
       .then(() => Actions.editprofile());
 };

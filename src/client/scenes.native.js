@@ -14,7 +14,6 @@ import CameraScreen from './containers/CameraScreen.native';
 
 const cameraRollRightHandler = () => {
   const selectedPic = store.getState().editProfile.selectedPic;
-  console.log('selectedPic : ', selectedPic);
   store.dispatch(postProfilePic(selectedPic));
 };
 
