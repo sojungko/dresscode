@@ -68,7 +68,6 @@ class CameraScreen extends Component {
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
       },
-      isRecording: false,
     };
   }
 
@@ -212,8 +211,8 @@ class CameraScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ editProfile }) => {
-  return { capturedPic: editProfile.selectedPic };
+const mapStateToProps = ({ profile }) => {
+  return { capturedPic: profile.selectedPic };
 };
 
 export default connect(mapStateToProps, { captureProfilePic })(CameraScreen);

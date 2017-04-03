@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     right: 0,
     left: 0,
+    backgroundColor: 'transparent',
   },
 });
 
@@ -26,12 +27,12 @@ const rightButtonConfig = {
 };
 
 const NavBar = (props) => {
-  if (!props.editProfile) {
+  /*if (!props.profile) {
     return (
       <View>
       </View>
     );
-  }
+  }*/
   return (
     <View style={styles.container}>
       <NavigationBar

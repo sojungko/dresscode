@@ -23,4 +23,8 @@ const Profile = () => (
   </View>
 );
 
-export default connect()(Profile);
+const mapStateToProps = () => {
+
+}
+
+export default connect(mapStateToProps)(Profile);

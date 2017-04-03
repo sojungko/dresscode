@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import usersReducer from './users.native';
-import editProfileReducer from './editprofile.native';
+import profileReducer from './profile.native';
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  editProfile: editProfileReducer,
+  profile: profileReducer,
 });
 
 export default rootReducer;

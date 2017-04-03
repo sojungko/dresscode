@@ -78,9 +78,9 @@ class EditProfile extends Component {
   }
 }
 
-const mapStateToProps = ({ editProfile }) => {
+const mapStateToProps = ({ profile }) => {
   return {
-    selectedPic: editProfile.selectedPic,
+    selectedPic: profile.selectedPic,
   };
 };
 

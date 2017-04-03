@@ -20,15 +20,17 @@ const styles = {
 };
 
 const cameraRollRightHandler = () => {
-  const selectedPic = store.getState().editProfile.selectedPic;
+  const selectedPic = store.getState().profile.selectedPic;
   store.dispatch(postProfilePic(selectedPic));
 };
 
 const cameraScreenRightHandler = () => {
   console.log('here');
-  const capturedPic = store.getState().editProfile.capturedPic;
-  store.dispatch(postProfilePic(capturedPic));
-}
+  const capturedPic = store.getState().profile.capturedPic;
+  if (capturedPic) {
+    store.dispatch(postProfilePic(capturedPic));
+  }
+};
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -40,7 +42,8 @@ const scenes = Actions.create(
       key="camerascreen"
       component={CameraScreen}
       navigationBarStyle={styles.cameraScreen}
-      navBar={NavBar}
+      rightTitle="Done"
+      onRight={cameraScreenRightHandler}
     />
     <Scene
       key="cameraroll"

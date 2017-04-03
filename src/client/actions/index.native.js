@@ -20,28 +20,28 @@ export const postProfilePic = (image) => {
   if (!image) {
     Actions.pop();
     return { type: C.NO_PROFILE_PIC_SELECTED, payload: false };
-  } else {
-    const file = {
-      uri: image.uri,
-      name: image.filename,
-      type: 'image/png',
-    };
-    console.log('access key id : ', AWS_ACCESS_KEY_ID);
-    const options = {
-      keyPrefix: 'images/',
-      bucket: 'dresscode-app',
-      region: 'us-east-1',
-      accessKey: AWS_ACCESS_KEY_ID,
-      secretKey: AWS_SECRET_ACCESS_KEY,
-      successActionStatus: 201,
-    };
-    return dispatch => RNS3.put(file, options)
-        .then((response) => {
-          console.log(response.body.postResponse);
-          return dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
-        })
-        .then(() => Actions.pop());
   }
+  const file = {
+    uri: image.uri,
+    name: image.filename,
+    type: 'image/png',
+  };
+  console.log('access key id : ', AWS_ACCESS_KEY_ID);
+  const options = {
+    keyPrefix: 'images/',
+    bucket: 'dresscode-app',
+    region: 'us-east-1',
+    accessKey: AWS_ACCESS_KEY_ID,
+    secretKey: AWS_SECRET_ACCESS_KEY,
+    successActionStatus: 201,
+  };
+  return dispatch => RNS3.put(file, options)
+      .then((response) => {
+        console.log(response.body.postResponse);
+        dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
+        dispatch({ type: C.SET_PROFILE_PIC , payload: response.body.postResponse.location });
+      })
+      .then(() => Actions.pop());
 };
 
 
