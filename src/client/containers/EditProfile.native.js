@@ -41,13 +41,6 @@ const DESTRUCTIVE_INDEX = 2;
 const CANCEL_INDEX = 3;
 
 class EditProfile extends Component {
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profilePic !== this.props.profilePic) {
-      this.setState({
-        profilePic: nextProps.profilePic,
-      });
-    }
-  }
   showActionSheet = () => {
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,

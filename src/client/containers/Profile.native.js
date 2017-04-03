@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -16,11 +16,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const Profile = ({ profilePic }) => (
-  <View style={styles.container}>
-    <Header profilePic={profilePic} />
-    <Gallery />
-  </View>
-);
+class Profile extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header profilePic={this.props.profilePic} />
+        <Gallery />
+      </View>
+    );
+  }
+}
 
-export default connect()(Profile);
+const mapStateToProps = ({ profile }) => {
+  return {
+    profilePic: profile.profilePic,
+  };
+};
+
+export default connect(mapStateToProps)(Profile);

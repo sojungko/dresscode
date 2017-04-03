@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import samplePic from '../../assets/samplepic.jpg';
+// import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +47,7 @@ const Header = ({ profilePic }) => (
   <View style={styles.container}>
     <Image
       style={styles.profilePic}
-      source={profilePic}
+      source={{ uri: profilePic }}
     />
     <View style={styles.profileInfo}>
       <Text
