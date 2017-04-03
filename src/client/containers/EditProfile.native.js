@@ -67,7 +67,7 @@ class EditProfile extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={this.props.profilePic}
+          source={{ uri: this.props.profilePic }}
           style={styles.profilePic}
         />
         <TouchableOpacity>

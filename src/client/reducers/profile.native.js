@@ -21,7 +21,7 @@ const profileReducer = (state = INITIAL_STATE, action) => {
       return { ...state, capturedPic: action.payload };
     case C.SET_PROFILE_PIC:
       console.log('profileReducer SET_PROFILE_PIC : ', action.payload);
-      return { ...state, profilePic: action.paylod };
+      return { ...state, profilePic: action.payload };
     default:
       return state;
   }
