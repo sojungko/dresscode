@@ -41,9 +41,13 @@ const DESTRUCTIVE_INDEX = 2;
 const CANCEL_INDEX = 3;
 
 class EditProfile extends Component {
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profilePic !== this.props.profilePic) {
+      this.setState({
+        profilePic: nextProps.profilePic,
+      });
+    }
   }
-
   showActionSheet = () => {
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
@@ -59,10 +63,11 @@ class EditProfile extends Component {
   };
 
   render() {
+    console.log('this.props.profilePic : ', this.props.profilePic);
     return (
       <View style={styles.container}>
         <Image
-          source={samplePic}
+          source={this.props.profilePic}
           style={styles.profilePic}
         />
         <TouchableOpacity>
@@ -80,7 +85,7 @@ class EditProfile extends Component {
 
 const mapStateToProps = ({ profile }) => {
   return {
-    selectedPic: profile.selectedPic,
+    profilePic: profile.profilePic,
   };
 };
 

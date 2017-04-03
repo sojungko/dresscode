@@ -36,7 +36,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene key="signup" component={SignUp} />
     <Scene key="login" component={LogIn} />
-    <Scene key="profile" component={Profile} />
+    <Scene key="profile" component={Profile} profilePic={store.getState().profile.profilePic} />
     <Scene key="editprofile" component={EditProfile} />
     <Scene
       key="camerascreen"

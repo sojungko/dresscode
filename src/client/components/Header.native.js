@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
 
 // TODO Pass down image source, name, bio as props
 
-const Header = () => (
+const Header = ({ profilePic }) => (
   <View style={styles.container}>
     <Image
       style={styles.profilePic}
-      source={samplePic}
+      source={profilePic}
     />
     <View style={styles.profileInfo}>
       <Text

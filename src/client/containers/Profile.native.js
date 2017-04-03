@@ -16,15 +16,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Profile = () => (
+const Profile = ({ profilePic }) => (
   <View style={styles.container}>
-    <Header />
+    <Header profilePic={profilePic} />
     <Gallery />
   </View>
 );
 
-const mapStateToProps = () => {
-
-}
-
-export default connect(mapStateToProps)(Profile);
+export default connect()(Profile);

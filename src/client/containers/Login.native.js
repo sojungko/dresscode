@@ -39,7 +39,7 @@ class LogIn extends Component {
 
   _onPressButton() {
     console.log('this.state : ', this.state);
-    fetch('http://localhost:3000/api/user/signin', {
+    fetch('http://10.16.0.37:3000/api/user/signin', {
       method: 'POST',
       body: JSON.stringify({
         username: this.state.username,

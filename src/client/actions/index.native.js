@@ -39,7 +39,7 @@ export const postProfilePic = (image) => {
       .then((response) => {
         console.log(response.body.postResponse);
         dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
-        dispatch({ type: C.SET_PROFILE_PIC , payload: response.body.postResponse.location });
+        dispatch({ type: C.SET_PROFILE_PIC, payload: response.body.postResponse.location });
       })
       .then(() => Actions.pop());
 };

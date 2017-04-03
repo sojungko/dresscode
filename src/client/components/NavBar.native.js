@@ -26,13 +26,7 @@ const rightButtonConfig = {
   handler: () => Actions.pop(),
 };
 
-const NavBar = (props) => {
-  /*if (!props.profile) {
-    return (
-      <View>
-      </View>
-    );
-  }*/
+const NavBar = () => {
   return (
     <View style={styles.container}>
       <NavigationBar

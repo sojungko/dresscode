@@ -20,6 +20,7 @@ const profileReducer = (state = INITIAL_STATE, action) => {
     case C.CAPTURE_PROFILE_PIC:
       return { ...state, capturedPic: action.payload };
     case C.SET_PROFILE_PIC:
+      console.log('profileReducer SET_PROFILE_PIC : ', action.payload);
       return { ...state, profilePic: action.paylod };
     default:
       return state;
