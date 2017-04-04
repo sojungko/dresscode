@@ -9,10 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import 'whatwg-fetch';
-
 import { postProfilePic } from '../actions/index.native';
-import samplePic from '../../assets/samplepic.jpg';
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +51,10 @@ class EditProfile extends Component {
       }
     });
   };
+
+  renderProfilePicButton = () => {
+
+  }
 
   render() {
     console.log('this.props.profilePic : ', this.props.profilePic);

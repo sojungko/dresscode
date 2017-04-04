@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Button from 'react-native-button';
-import 'whatwg-fetch';
+import { signUpUser } from '../actions/index.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,19 +40,13 @@ class SignUp extends Component {
   }
 
   _onPressButton = () => {
-    fetch('http://localhost:3000/api/user/post', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.username,
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-      })
-    })
-      .then((user)=> {
-        console.log('user saved : ', user);
-        Actions.login();
-      });
+    const user = {
+      username: this.state.username,
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.signUpUser(user);
   }
 
   render() {
@@ -95,4 +89,4 @@ class SignUp extends Component {
   }
 }
 
-export default connect()(SignUp);
+export default connect(null, { signUpUser })(SignUp);

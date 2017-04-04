@@ -20,7 +20,9 @@ module.exports = {
       } else {
         db.User.create({ username, name, email, password: hash }).then(user => {
           console.log('user saved: ', user);
-          return reply(user.dataValues).code(201);
+          const token = jwt.sign(user.dataValues.username, process.env.JWT_SECRET);
+          const userObj = { username, name, email, token };
+          return reply(userObj).code(201);
         });
       }
     });

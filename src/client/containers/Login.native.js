@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Button from 'react-native-button';
+import { logInUser } from '../actions/index.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,23 +39,11 @@ class LogIn extends Component {
   }
 
   _onPressButton() {
-    console.log('this.state : ', this.state);
-    fetch('http://10.16.0.37:3000/api/user/signin', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password,
-      }),
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        console.log(res.token);
-        AsyncStorage.setItem('token', res.token);
-        Actions.profile();
-        // console.log(React.AsyncStorage.getItem('token'));
-      })
+    const user = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    this.props.logInUser(user);
   }
 
   render() {
@@ -87,4 +76,4 @@ class LogIn extends Component {
   }
 }
 
-export default connect()(LogIn);
+export default connect(null, { logInUser })(LogIn);

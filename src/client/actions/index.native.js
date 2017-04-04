@@ -2,7 +2,41 @@ import axios from 'axios';
 import { RNS3 } from 'react-native-aws3';
 import { Actions } from 'react-native-router-flux';
 import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from 'react-native-dotenv';
+import store from 'react-native-simple-store';
 import * as C from '../constants/index.native';
+
+/* -- User Handling -- */
+export const signUpUser = (userObj) => {
+  return dispatch => fetch('http://10.16.0.37:3000/api/user/post', {
+    method: 'POST',
+    body: JSON.stringify(userObj),
+  })
+    .then(res => res.json())
+    .then((res) => {
+      console.log('Sign up response : ', res);
+      store.save('token', res.token)
+        .then(() => {
+          Actions.editprofile();
+          dispatch({ type: C.SIGN_UP_USER, payload: true });
+        });
+    });
+};
+
+export const logInUser = (userObj) => {
+  return dispatch => fetch('http://10.16.0.37:3000/api/user/signin', {
+    method: 'POST',
+    body: JSON.stringify(userObj),
+  })
+    .then(res => res.json())
+    .then((res) => {
+      console.log('Log in response : ', res);
+      store.save('token', res.token)
+        .then(() => {
+          Actions.profile();
+          dispatch({ type: C.LOG_IN_USER, payload: true });
+        });
+    });
+};
 
 /* -- Image Handling -- */
 export const selectProfilePic = (image) => {
