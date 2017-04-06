@@ -9,7 +9,6 @@ const usersReducer = (state = INITIAL_STATE, action) => {
     case A.SIGN_UP_USER:
       return { ...state, isSignedUp: action.payload };
     case A.LOG_IN_USER:
-    console.log('[reducers/users] LOG_IN_USER action.payload : ', action.payload);
       return { ...state, userInfo: action.payload };
     default:
       return state;

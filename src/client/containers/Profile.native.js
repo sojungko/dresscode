@@ -17,18 +17,20 @@ const styles = StyleSheet.create({
 
 class Profile extends Component {
   render() {
+    console.log('this.props : ', this.props);
     return (
       <View style={styles.container}>
-        <Header profilePic={this.props.profilePic} />
+        <Header name={this.props.name} profilePic={this.props.profilePic} />
         <Gallery />
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ profile }) => {
+const mapStateToProps = ({ users }) => {
   return {
-    profilePic: profile.profilePic,
+    name: users.userInfo.name,
+    profilePic: users.userInfo.profilePic || '',
   };
 };
 
