@@ -17,5 +17,10 @@ module.exports = {
       path: '/api/user/signin',
       handler: handlers.signInUser,
     },
+    {
+      method: 'POST',
+      path: '/api/user/post/profilepic',
+      handler: handlers.setProfilePic,
+    },
   ],
 };

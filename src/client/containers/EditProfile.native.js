@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
   },
   button: {
     marginBottom: 10,

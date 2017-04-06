@@ -1,6 +1,7 @@
 const db = require('../db/config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const md5 = require('md5');
 
 module.exports = {
 
@@ -33,17 +34,22 @@ module.exports = {
     db.User.findAll({
       where: { username },
     })
-      .then(user => {
+      .then((user) => {
         console.log(user);
         bcrypt.compare(password, user[0].dataValues.password, (err, res) => {
           if (err) {
             console.log('Error comparing passwords : ', err);
           } else {
+            const { name, profilePic } = user[0];
             const token = jwt.sign(user[0].dataValues.username, process.env.JWT_SECRET);
-            return reply({ token }).code(201);
+            const ETag = md5(user.profilePic || '');
+            return reply({ token, username, name, profilePic, ETag }).code(201);
           }
         });
       });
+  },
+
+  updateUser: (req, reply) => { 
   },
 
   followUser: (req, reply) => {
@@ -55,6 +61,7 @@ module.exports = {
   },
 
   setProfilePic: (req, reply) => {
+    console.log()
     reply();
   },
 

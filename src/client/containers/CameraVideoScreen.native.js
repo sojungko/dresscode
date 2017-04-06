@@ -69,7 +69,7 @@ class CameraScreen extends Component {
         flashMode: Camera.constants.FlashMode.auto,
       },
       isRecording: false,
-    }
+    };
   }
 
   takePicture = () => {

@@ -5,16 +5,17 @@ import { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } from 'react-native-dotenv';
 import store from 'react-native-simple-store';
 import * as C from '../constants/index.native';
 
+const server = 'http://10.16.0.37:3000';
+
 /* -- User Handling -- */
 export const signUpUser = (userObj) => {
-  return dispatch => fetch('http://10.16.0.37:3000/api/user/post', {
+  return dispatch => fetch(`${server}/api/user/post`, {
     method: 'POST',
     body: JSON.stringify(userObj),
   })
     .then(res => res.json())
     .then((res) => {
-      console.log('Sign up response : ', res);
-      store.save('token', res.token)
+      store.save({ token: res.token, username: res.username })
         .then(() => {
           Actions.editprofile();
           dispatch({ type: C.SIGN_UP_USER, payload: true });
@@ -23,22 +24,22 @@ export const signUpUser = (userObj) => {
 };
 
 export const logInUser = (userObj) => {
-  return dispatch => fetch('http://10.16.0.37:3000/api/user/signin', {
+  return dispatch => fetch(`${server}/api/user/signin`, {
     method: 'POST',
     body: JSON.stringify(userObj),
   })
     .then(res => res.json())
     .then((res) => {
-      console.log('Log in response : ', res);
-      store.save('token', res.token)
+      console.log('[actions/index] logInUser res: ', res);
+      const { token, username, ETag } = res;
+      dispatch({ type: C.LOG_IN_USER, payload: res });
+      store.save('user', { token, username, ETag })
         .then(() => {
           Actions.profile();
-          dispatch({ type: C.LOG_IN_USER, payload: true });
         });
     });
 };
 
-/* -- Image Handling -- */
 export const selectProfilePic = (image) => {
   console.log('selectProfilePic action image: ', image);
   return { type: C.SELECT_PROFILE_PIC, payload: image };
@@ -49,8 +50,8 @@ export const captureProfilePic = (image) => {
   return dispatch => dispatch({ type: C.CAPTURE_PROFILE_PIC, payload: image.path });
 };
 
+// * saves to S3 * //
 export const postProfilePic = (image) => {  
-  console.log('Posting profile pic... ', image);
   if (!image) {
     Actions.pop();
     return { type: C.NO_PROFILE_PIC_SELECTED, payload: false };
@@ -60,7 +61,6 @@ export const postProfilePic = (image) => {
     name: image.filename,
     type: 'image/png',
   };
-  console.log('access key id : ', AWS_ACCESS_KEY_ID);
   const options = {
     keyPrefix: 'images/',
     bucket: 'dresscode-app',
@@ -71,11 +71,25 @@ export const postProfilePic = (image) => {
   };
   return dispatch => RNS3.put(file, options)
       .then((response) => {
-        console.log(response.body.postResponse);
         dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
         dispatch({ type: C.SET_PROFILE_PIC, payload: response.body.postResponse.location });
       })
       .then(() => Actions.pop());
 };
 
-
+// * saves to database *//
+export const saveProfilePic = (imageURL) => {
+  store.get('username')
+    .then((username) => {
+      const sending = { username, imageURL };
+      return dispatch => fetch(`${server}/api/user/post/profilepic`, {
+        method: 'POST',
+        body: JSON.stringify(sending),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          store.save('etag', res.etag)
+            .then(() => dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body }))
+        });
+    });
+};
