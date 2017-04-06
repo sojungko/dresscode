@@ -30,7 +30,7 @@ class Profile extends Component {
 const mapStateToProps = ({ users }) => {
   return {
     name: users.userInfo.name,
-    profilePic: users.userInfo.profilePic || '',
+    profilePic: users.userInfo.profilePic,
   };
 };
 

@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 3,
   },
+  anonymousPic: {
+    width: 100,
+    height: 100,
+  },
   profileInfo: {
     width: 0,
     flexGrow: 1,
@@ -43,12 +47,27 @@ const styles = StyleSheet.create({
 
 // TODO Pass down image source, name, bio as props
 
-const Header = ({ name, profilePic }) => (
-  <View style={styles.container}>
+const renderProfilePic = (uri) => {
+  if (!uri) {
+    return (
+      <Image
+        style={styles.anonymousPic}
+        source={require('../../assets/anonymous_user.png')}
+      />
+    );
+  }
+  return (
     <Image
       style={styles.profilePic}
-      source={{ uri: profilePic }}
+      source={{ uri }}
     />
+  );
+};
+
+
+const Header = ({ name, profilePic }) => (
+  <View style={styles.container}>
+    {renderProfilePic(profilePic)}
     <View style={styles.profileInfo}>
       <Text
         style={styles.name}
