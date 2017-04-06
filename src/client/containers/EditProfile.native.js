@@ -54,38 +54,40 @@ class EditProfile extends Component {
     });
   };
 
-  renderProfilePicButton = () => {
+  renderProfilePicButton = (uri) => (
+    <TouchableOpacity>
+      <Button
+        title={!uri ? 'Add Profile Photo' : 'Change Profile Photo'}
+        onPress={this.showActionSheet}
+        style={styles.button}
+      />
+    </TouchableOpacity>
+  );
 
-  }
+
   renderprofilePic = (uri) => {
     if (!uri) {
       return (
         <Image
           source={require('../../assets/anonymous_user.png')}
           style={styles.profilePic}
-        />      
+        />
       );
     }
     return (
       <Image
         source={{ uri }}
         style={styles.profilePic}
-      />      
-    )
+      />
+    );
   }
 
   render() {
-    console.log('this.props.profilePic : ', this.props.profilePic);
+    const profilePic = this.props.profilePic;
     return (
       <View style={styles.container}>
-        {this.renderprofilePic(this.props.profilePic)}
-        <TouchableOpacity>
-          <Button
-            title="Change Profile Photo"
-            onPress={this.showActionSheet}
-            style={styles.button}
-          />
-        </TouchableOpacity>
+        {this.renderprofilePic(profilePic)}
+        {this.renderProfilePicButton(profilePic)}
       </View>
 
     );
