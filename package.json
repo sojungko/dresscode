@@ -16,7 +16,6 @@
     "hapi-postgres-connection": "^6.1.0",
     "inert": "^4.1.0",
     "jsonwebtoken": "^7.3.0",
-    "md5": "^2.2.1",
     "moment": "^2.17.1",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",

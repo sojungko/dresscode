@@ -19,7 +19,7 @@ module.exports = {
     },
     {
       method: 'POST',
-      path: '/api/user/post/profilepic',
+      path: '/api/user/profilepic',
       handler: handlers.setProfilePic,
     },
   ],

@@ -42,8 +42,7 @@ module.exports = {
           } else {
             const { name, profilePic } = user[0];
             const token = jwt.sign(user[0].dataValues.username, process.env.JWT_SECRET);
-            const ETag = md5(user.profilePic || '');
-            return reply({ token, username, name, profilePic, ETag }).code(201);
+            return reply({ token, username, name, profilePic }).code(201);
           }
         });
       });
@@ -61,8 +60,8 @@ module.exports = {
   },
 
   setProfilePic: (req, reply) => {
-    console.log()
-    reply();
+    console.log(JSON.parse(req.payload));
+    reply({ hello: 'hello' });
   },
 
   remoteProfilePic: (req, reply) => {

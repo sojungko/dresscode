@@ -31,12 +31,10 @@ export const logInUser = (userObj) => {
     .then(res => res.json())
     .then((res) => {
       console.log('[actions/index] logInUser res: ', res);
-      const { token, username, ETag } = res;
-      dispatch({ type: C.LOG_IN_USER, payload: res });
-      store.save('user', { token, username, ETag })
-        .then(() => {
-          Actions.profile();
-        });
+      const { token, username } = res;
+      store.save('user', { token, username })
+        .then(() => dispatch({ type: C.LOG_IN_USER, payload: res }))
+        .then(() => Actions.profile());
     });
 };
 
@@ -50,8 +48,25 @@ export const captureProfilePic = (image) => {
   return dispatch => dispatch({ type: C.CAPTURE_PROFILE_PIC, payload: image.path });
 };
 
+// * saves to database *//
+export const saveProfilePic = ({ username, location }) => {
+  console.log('[actions/index] saveProfilePic location : ', location);
+  const sending = { username, profilePic: location };
+  console.log('[actions/index] saveProfilePic sending... : ', sending);
+  return dispatch => fetch(`${server}/api/user/profilepic`, {
+    method: 'POST',
+    body: JSON.stringify(sending),
+  })
+    .then(res => res.json())
+    .then((res) => {
+      console.log('[actions/index] saveProfilePic response : ', res);
+      dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body });
+    });
+
+};
+
 // * saves to S3 * //
-export const postProfilePic = (image) => {  
+export const postProfilePic = (image) => {
   if (!image) {
     Actions.pop();
     return { type: C.NO_PROFILE_PIC_SELECTED, payload: false };
@@ -71,25 +86,30 @@ export const postProfilePic = (image) => {
   };
   return dispatch => RNS3.put(file, options)
       .then((response) => {
-        dispatch({ type: C.POST_PROFILE_PIC_SUCCESS, payload: response.body.postResponse });
-        dispatch({ type: C.SET_PROFILE_PIC, payload: response.body.postResponse.location });
-      })
-      .then(() => Actions.pop());
+        const postResponse = response.body.postResponse;
+        const { location } = postResponse;
+        store.update('user', { etag: response.body.postResponse.location })
+          .then(() => {
+            store.get('user', (user) => {
+              const { username } = user;
+              const sending = { username, profilePic: location };
+              console.log('[actions/index] saveProfilePic sending... : ', sending);
+              return dispatch => fetch(`${server}/api/user/profilepic`, {
+                method: 'POST',
+                body: JSON.stringify(sending),
+              })
+                .then(res => res.json())
+                .then((res) => {
+                  console.log('[actions/index] saveProfilePic response : ', res);
+                  dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body });
+                });
+            })
+            .then(() => {
+              dispatch({ type: C.POST_PROFILE_PIC_AWS, payload: postResponse });
+              dispatch({ type: C.SET_PROFILE_PIC, payload: location });
+            })
+            .then(() => Actions.pop());
+          });
+      });
 };
 
-// * saves to database *//
-export const saveProfilePic = (imageURL) => {
-  store.get('username')
-    .then((username) => {
-      const sending = { username, imageURL };
-      return dispatch => fetch(`${server}/api/user/post/profilepic`, {
-        method: 'POST',
-        body: JSON.stringify(sending),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          store.save('etag', res.etag)
-            .then(() => dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body }))
-        });
-    });
-};

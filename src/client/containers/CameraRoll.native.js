@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import CameraRollPicker from 'react-native-camera-roll-picker';
+import store from 'react-native-simple-store';
 import { selectProfilePic } from '../actions/index.native';
 
 const styles = StyleSheet.create({
@@ -45,7 +46,6 @@ class CameraRoll extends Component {
 
   getSelectedImages(images) {
     this.setState({ num: images.length, selected: images });
-    console.log(images[0]);
     this.props.selectProfilePic(images[0]);
   }
 
