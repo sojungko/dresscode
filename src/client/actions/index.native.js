@@ -86,30 +86,25 @@ export const postProfilePic = (image) => {
   };
   return dispatch => RNS3.put(file, options)
       .then((response) => {
-        const postResponse = response.body.postResponse;
-        const { location } = postResponse;
-        store.update('user', { etag: response.body.postResponse.location })
-          .then(() => {
-            store.get('user', (user) => {
-              const { username } = user;
-              const sending = { username, profilePic: location };
-              console.log('[actions/index] saveProfilePic sending... : ', sending);
-              return dispatch => fetch(`${server}/api/user/profilepic`, {
-                method: 'POST',
-                body: JSON.stringify(sending),
-              })
-                .then(res => res.json())
-                .then((res) => {
-                  console.log('[actions/index] saveProfilePic response : ', res);
-                  dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body });
-                });
-            })
-            .then(() => {
-              dispatch({ type: C.POST_PROFILE_PIC_AWS, payload: postResponse });
-              dispatch({ type: C.SET_PROFILE_PIC, payload: location });
-            })
-            .then(() => Actions.pop());
-          });
+        return { location: response.body.postResponse.location }
+      })
+      .then(({ location }) => store.update('user', { uri: location }))
+      .then(() => store.get('user'))
+      .then((user) => {
+        console.log('here : ', user);
+        const { username, uri } = user;
+        return fetch(`${server}/api/user/profilepic`, {
+          method: 'POST',
+          body: JSON.stringify({ username, uri }),
+        })
+        .then(res => res.json())
+        .then((res) => {
+          console.log('here now : ', res);
+          dispatch({ type: C.POST_PROFILE_PIC_DB, payload: true });
+          dispatch({ type: C.POST_PROFILE_PIC_AWS, payload: true });
+          dispatch({ type: C.SET_PROFILE_PIC, payload: true });
+        })
+        .then(() => Actions.pop());
       });
 };
 
