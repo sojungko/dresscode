@@ -57,15 +57,28 @@ class EditProfile extends Component {
   renderProfilePicButton = () => {
 
   }
+  renderprofilePic = (uri) => {
+    if (!uri) {
+      return (
+        <Image
+          source={require('../../assets/anonymous_user.png')}
+          style={styles.profilePic}
+        />      
+      );
+    }
+    return (
+      <Image
+        source={{ uri }}
+        style={styles.profilePic}
+      />      
+    )
+  }
 
   render() {
     console.log('this.props.profilePic : ', this.props.profilePic);
     return (
       <View style={styles.container}>
-        <Image
-          source={{ uri: this.props.profilePic }}
-          style={styles.profilePic}
-        />
+        {this.renderprofilePic(this.props.profilePic)}
         <TouchableOpacity>
           <Button
             title="Change Profile Photo"
