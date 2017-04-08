@@ -14,8 +14,8 @@ module.exports = {
       .then(user => reply(user).code(200));
   },
 
-  postUser: (req, reply) => {
-    const { username, name, email, password } = JSON.parse(req.payload);
+  postUser: ({ payload: { username, name, email, password } }, reply) => {
+
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         console.log('Error hashing password : ', err);
@@ -30,8 +30,7 @@ module.exports = {
     });
   },
 
-  signInUser: (req, reply) => {
-    const { username, password } = JSON.parse(req.payload);
+  signInUser: ({ payload: { username, password } }, reply) => {
     User.findAll({ where: { username } })
       .then((user) => {
         console.log(user);
@@ -47,33 +46,30 @@ module.exports = {
       });
   },
 
-  updateUser: (req, reply) => {
+  updateUser: ({ payload: { username, name, bio } }, reply) => {
     /*
     Queries using username and updates user's name and bio.
     Profile pictures get own update method.
     See setProfilePic and removeProfilePic.
     */
-    const { username, name, bio } = JSON.parse(req.payload);
     User.findAll({ where: { username } })
       .then(user => user.update({ name, bio }))
       .then(user => reply(user).code(201));
   },
 
-  followUser: (req, reply) => {
+  followUser: ({ payload: { username, target } }, reply) => {
     /*
     Queries using username and follows target.
     */
-    const { username, target } = JSON.parse(req.payload);
     User.findAll({ where: { username } })
       .then(user => user.setDataValue(user.getDataValue('following').push(target)))
       .then(() => reply().code(201));
   },
 
-  unfollowUser: (req, reply) => {
+  unfollowUser: ({ payload: { username, target } }, reply) => {
     /*
     Queries using username and unfollows target.
     */
-    const { username, target } = JSON.parse(req.payload);
     User.findAll({ where: { username } })
       .then((user) => {
         let following = user.getDataValue('following');
@@ -84,16 +80,13 @@ module.exports = {
       .then(() => reply().code(200));
   },
 
-  setProfilePic: (req, reply) => {
-    const { username, uri } = JSON.parse(req.payload);
-    console.log(JSON.parse(req.payload));
+  setProfilePic: ({ payload: { username, uri } }, reply) => {
     User.findAll({ where: { username } })
       .then(user => user.setDataValue('profilePic', uri))
       .then(() => reply(uri).code(201));
   },
 
-  removeProfilePic: (req, reply) => {
-    const { username } = JSON.parse(req.payload);
+  removeProfilePic: ({ payload: { username } }, reply) => {
     User.findAll({ where: { username } })
       .then(user => user.setDataValue('profilePic', null))
       .then(() => reply().code(200));

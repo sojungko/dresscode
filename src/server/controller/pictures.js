@@ -1,29 +1,54 @@
-
+const Picture = require('../db/config').Picture;
+const User = require('../db/config').User;
 
 module.exports = {
 /* -- Picture Methods -- */
-  postPic: (req, reply) => {
+  getPics: ({ payload: { id }, params: { username } }, reply) => {
+    if (id) {
+      Picture.findAll({ where: { userId: id } })
+        .then(pictures => reply(pictures).code(200));
+    } else if (username) {
+      User.findAll({ where: { username } })
+        .then(user => Picture.findAll({ where: { userId: user.id } }))
+        .then(pictures => reply(pictures).code(200));
+    }
+  },
+
+  postPic: ({ payload: { id, uri } }, reply) => {
     /*
-    Creates Picture instance with userId   
+    Creates Picture instance with userId
     */
-    const { }
-
-    reply();
+    Picture.create({ url: uri, userId: id })
+      .then(picture => reply(picture).code(201));
   },
 
-  deletePic: (req, reply) => {
-    reply();
+  deletePic: ({ payload: { uri } }, reply) => {
+    Picture.findAll({ where: { url: uri } })
+      .then(picture => picture.destroy())
+      .then(() => reply().code(200));
   },
 
-  likePic: (req, reply) => {
-    reply();
+  likePic: ({ payload: { uri } }, reply) => {
+    Picture.findAll({ where: { url: uri } })
+      .then(picture => picture.increment('likes'))
+      .then(() => reply().code(201));
   },
 
-  dislikePic: (req, reply) => {
-    reply();
+  dislikePic: ({ payload: { uri } }, reply) => {
+    Picture.findAll({ where: { url: uri } })
+      .then(picture => picture.increment('dislikes'))
+      .then(() => reply().code(200));
   },
 
-  unlikePic: (req, reply) => {
-    reply();
+  unlikePic: ({ payload: { uri } }, reply) => {
+    Picture.findAll({ where: { url: uri } })
+      .then(picture => picture.decrement('likes'))
+      .then(() => reply().code(200));
+  },
+
+  unDislikePic: ({ payload: { uri } }, reply) => {
+    Picture.findAll({ where: { url: uri } })
+      .then(picture => picture.decrement('dislikes'))
+      .then(() => reply().code(200));
   },
 };
