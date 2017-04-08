@@ -71,7 +71,7 @@ User.hasMany(Picture);
 Comment.belongsTo(Picture);
 Picture.hasMany(Comment);
 
-db.sync();
+db.sync({ force: true });
 
 exports.User = User;
 exports.Picture = Picture;

@@ -11,11 +11,16 @@ const server = 'http://10.16.0.37:3000';
 export const signUpUser = (userObj) => {
   return dispatch => fetch(`${server}/api/user/post`, {
     method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(userObj),
   })
     .then(res => res.json())
     .then((res) => {
-      store.save({ token: res.token, username: res.username })
+      console.log(res);
+      store.save('user', { token: res.token, username: res.username })
         .then(() => {
           Actions.editprofile();
           dispatch({ type: C.SIGN_UP_USER, payload: true });

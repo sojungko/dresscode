@@ -15,7 +15,6 @@ module.exports = {
   },
 
   postUser: ({ payload: { username, name, email, password } }, reply) => {
-
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         console.log('Error hashing password : ', err);
@@ -24,6 +23,7 @@ module.exports = {
           console.log('user saved: ', user);
           const token = jwt.sign(user.dataValues.username, process.env.JWT_SECRET);
           const userObj = { id: user.id, username, name, email, token };
+          console.log(userObj);
           return reply(userObj).code(201);
         });
       }

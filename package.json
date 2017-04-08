@@ -17,6 +17,7 @@
     "inert": "^4.1.0",
     "jsonwebtoken": "^7.3.0",
     "moment": "^2.17.1",
+    "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "pg": "^6.1.2",
@@ -54,7 +55,8 @@
     "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.36.0",
     "jest": "18.1.0",
-    "react-test-renderer": "15.4.2"
+    "react-test-renderer": "15.4.2",
+    "sequelize-cli": "^2.7.0"
   },
   "jest": {
     "preset": "react-native"
