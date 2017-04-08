@@ -46,6 +46,9 @@ const User = db.define('user', {
       isUrl: true,
     },
   },
+  following: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+  },
 });
 
 const Picture = db.define('picture', {

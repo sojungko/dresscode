@@ -1,26 +1,28 @@
-const handlers = require('./controller/handlers');
+const Users = require('./controller/users');
+const Pictures = require('./controller/pictures');
+const Comments = require('./controller/comments');
 
 module.exports = {
   routes: [
     {
       method: 'GET',
       path: '/api/user/{username}',
-      handler: handlers.getUser,
+      handler: Users.getUser,
     },
     {
       method: 'POST',
       path: '/api/user/post',
-      handler: handlers.postUser,
+      handler: Users.postUser,
     },
     {
       method: 'POST',
       path: '/api/user/signin',
-      handler: handlers.signInUser,
+      handler: Users.signInUser,
     },
     {
       method: 'POST',
       path: '/api/user/profilepic',
-      handler: handlers.setProfilePic,
+      handler: Users.setProfilePic,
     },
   ],
 };

@@ -48,23 +48,6 @@ export const captureProfilePic = (image) => {
   return dispatch => dispatch({ type: C.CAPTURE_PROFILE_PIC, payload: image.path });
 };
 
-// * saves to database *//
-export const saveProfilePic = ({ username, location }) => {
-  console.log('[actions/index] saveProfilePic location : ', location);
-  const sending = { username, profilePic: location };
-  console.log('[actions/index] saveProfilePic sending... : ', sending);
-  return dispatch => fetch(`${server}/api/user/profilepic`, {
-    method: 'POST',
-    body: JSON.stringify(sending),
-  })
-    .then(res => res.json())
-    .then((res) => {
-      console.log('[actions/index] saveProfilePic response : ', res);
-      dispatch({ type: C.POST_PROFILE_PIC_DB, payload: res.body });
-    });
-
-};
-
 // * saves to S3 * //
 export const postProfilePic = (image) => {
   if (!image) {
