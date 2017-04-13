@@ -74,25 +74,24 @@ export const postProfilePic = (image) => {
   };
   return dispatch => RNS3.put(file, options)
       .then((response) => {
-        return { location: response.body.postResponse.location }
+        return { location: response.body.postResponse.location };
       })
-      .then(({ location }) => store.update('user', { uri: location }))
+      .then(({ location }) => {
+        dispatch({ type: C.SET_PROFILE_PIC, payload: location });
+        return store.update('user', { uri: location });
+      })
       .then(() => store.get('user'))
       .then((user) => {
-        console.log('here : ', user);
         const { username, uri } = user;
-        return fetch(`${server}/api/user/profilepic`, {
+        return fetch(`${server}/api/user/setpic`, {
           method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({ username, uri }),
         })
-        .then(res => res.json())
-        .then((res) => {
-          console.log('here now : ', res);
-          dispatch({ type: C.POST_PROFILE_PIC_DB, payload: true });
-          dispatch({ type: C.POST_PROFILE_PIC_AWS, payload: true });
-          dispatch({ type: C.SET_PROFILE_PIC, payload: true });
-        })
         .then(() => Actions.pop());
-      });
+      // });
 };
 

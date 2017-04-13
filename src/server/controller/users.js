@@ -15,17 +15,22 @@ module.exports = {
   },
 
   postUser: ({ payload: { username, name, email, password } }, reply) => {
+    console.log('Posting user : ', username, name, email, password);
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         console.log('Error hashing password : ', err);
       } else {
-        User.create({ username, name, email, password: hash }).then((user) => {
-          console.log('user saved: ', user);
-          const token = jwt.sign(user.dataValues.username, process.env.JWT_SECRET);
-          const userObj = { id: user.id, username, name, email, token };
-          console.log(userObj);
-          return reply(userObj).code(201);
-        });
+        User.create({ username, name, email, password: hash })
+          .then((user) => {
+            console.log('user saved: ', user);
+            const token = jwt.sign(user.dataValues.username, process.env.JWT_SECRET);
+            const userObj = { id: user.id, username, name, email, token };
+            console.log(userObj);
+            return reply(userObj).code(201);
+          })
+          .catch((error) => {
+            console.log('Error creating user : ', error);
+          });
       }
     });
   },
@@ -81,9 +86,17 @@ module.exports = {
   },
 
   setProfilePic: ({ payload: { username, uri } }, reply) => {
+    // console.log('[User/setProfilePic] payload : ', payload);
+    console.log('[User/setProfilePic] username : ', username, 'uri : ', uri);
     User.findAll({ where: { username } })
-      .then(user => user.setDataValue('profilePic', uri))
-      .then(() => reply(uri).code(201));
+      .then((user) => {
+        console.log('[User/setProfilePic] user found: ', user);
+        user[0].setDataValue('profilePic', uri);
+      })
+      .then(() => {
+        console.log('[User/setProfilePic] sending uri back : ', uri);
+        reply(uri).code(201);
+      });
   },
 
   removeProfilePic: ({ payload: { username } }, reply) => {

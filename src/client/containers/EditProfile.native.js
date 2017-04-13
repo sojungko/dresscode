@@ -84,6 +84,7 @@ class EditProfile extends Component {
 
   render() {
     const profilePic = this.props.profilePic;
+    console.log('[EditProfile] profilePic: ', profilePic)
     return (
       <View style={styles.container}>
         {this.renderprofilePic(profilePic)}
