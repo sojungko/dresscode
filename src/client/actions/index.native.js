@@ -92,6 +92,6 @@ export const postProfilePic = (image) => {
           body: JSON.stringify({ username, uri }),
         })
         .then(() => Actions.pop());
-      // });
+      });
 };
 
